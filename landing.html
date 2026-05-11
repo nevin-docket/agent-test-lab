@@ -253,5 +253,27 @@
       console.error('[Test] Failed to pass context:', error);
     });
   </script>
+
+  <!-- ===== 3. Suppress benign "Connection failed" toast inside the widget's shadow DOM ===== -->
+  <script>
+    (function () {
+      function hideConnectionFailedToast(root, depth) {
+        if (!root || depth > 10) return;
+        try {
+          Array.prototype.forEach.call(root.querySelectorAll('*'), function (el) {
+            var t = (el.textContent || '').trim();
+            if (t.length < 200 && /Connection failed/i.test(t) && el.children.length < 8) {
+              el.style.display = 'none';
+            }
+            if (el.shadowRoot) hideConnectionFailedToast(el.shadowRoot, depth + 1);
+          });
+        } catch (e) {}
+      }
+      setInterval(function () {
+        var widget = document.querySelector('ai-seller-widget');
+        if (widget && widget.shadowRoot) hideConnectionFailedToast(widget.shadowRoot, 0);
+      }, 300);
+    })();
+  </script>
 </body>
 </html>
