@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connect with Sales — Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: linear-gradient(180deg, #ffffff 0%, #f3f4fa 100%);
+      min-height: 100vh;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+    }
+    .nav {
+      padding: 22px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .logo { font-size: 17px; font-weight: 700; color: #4f46e5; }
+    .nav-flag {
+      font-size: 12px;
+      background: #f3f4f6;
+      color: #6b7280;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+    .hero {
+      max-width: 680px;
+      margin: 80px auto 0;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(79, 70, 229, 0.08);
+      color: #4f46e5;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin: 0 0 20px;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+    .sub { font-size: 17px; line-height: 1.65; color: #6b7280; margin: 0 0 12px; }
+    .actions {
+      margin-top: 36px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      font-size: 13px;
+    }
+    .actions a {
+      color: #6b7280;
+      text-decoration: none;
+      border-bottom: 1px dashed #d1d5db;
+      padding-bottom: 1px;
+    }
+    .actions a:hover { color: #111827; }
+    /* Debug panel */
+    .debug {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      z-index: 9999;
+      width: 320px;
+      font-size: 12px;
+    }
+    .debug h3 {
+      margin: 0 0 10px;
+      font-size: 11px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+    }
+    .debug .ctx {
+      background: #f8f9fc;
+      padding: 10px;
+      border-radius: 8px;
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 11px;
+      color: #4a4a6a;
+      max-height: 200px;
+      overflow: auto;
+      white-space: pre-wrap;
+      line-height: 1.45;
+    }
+    .debug button {
+      width: 100%;
+      margin-top: 8px;
+      padding: 7px 10px;
+      border-radius: 7px;
+      border: 1px solid #e5e7eb;
+      background: white;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .debug button:hover { background: #f9fafb; }
+    .debug a {
+      display: block;
+      text-align: center;
+      margin-top: 8px;
+      color: #4f46e5;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="logo">Agent Test Lab</div>
+    <div class="nav-flag">internal test page</div>
+  </div>
+
+  <div class="hero">
+    <div class="badge">📨 Check your email</div>
+    <h1>One of our reps will be in touch soon</h1>
+    <p class="sub">We want to make sure we're set up for a great conversation before connecting you with our sales team. You'll receive an email shortly with a few questions.</p>
+    <div class="actions">
+      <a href="./index.html">← Back to form</a>
+    </div>
+  </div>
+
+  <!-- Debug panel -->
+  <div class="debug">
+    <h3>Warm context loaded</h3>
+    <div class="ctx" id="ctxDisplay">Loading…</div>
+    <button onclick="clearAndReload()">Clear &amp; reload (cold path)</button>
+    <a href="./index.html">↻ Re-fill the form</a>
+  </div>
+
+  <script>
+    function clearAndReload() {
+      sessionStorage.removeItem('circle_sales_context');
+      location.reload();
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      var stored = sessionStorage.getItem('circle_sales_context');
+      var el = document.getElementById('ctxDisplay');
+      if (stored) {
+        el.textContent = JSON.stringify(JSON.parse(stored), null, 2);
+      } else {
+        el.textContent = '(no warm context — cold path)';
+      }
+    });
+  </script>
+
+  <!-- ===== 1. Docket widget loader ===== -->
+  <script>
+    window.AISellerSettings = {
+      agent_id: '7b56d9bd-4d49-456b-8543-5c0aa256ea82',
+    };
+    (function () {
+      var w = window;
+      var ew = w.AISeller;
+      if (typeof ew === 'function') {
+        ew('update', w.AISellerSettings);
+      } else {
+        var d = document;
+        var i = function () { i.q.push(arguments); };
+        i.q = [];
+        i.q.push(['update', w.AISellerSettings]);
+        w.AISeller = i;
+        var l = function () {
+          var s = d.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = 'https://d33t2173eag6fx.cloudfront.net/script/app/inbound-se-script/ai-seller.js';
+          var x = d.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+        };
+        if (document.readyState === 'complete') {
+          l();
+        } else if (w.attachEvent) {
+          w.attachEvent('onload', l);
+        } else {
+          w.addEventListener('load', l, false);
+        }
+      }
+    })();
+  </script>
+
+  <!-- ===== 2. Warm context handoff (readiness poll + setContext + showAndConnect) ===== -->
+  <script>
+    async function waitForDocketWidget(timeoutMs) {
+      var startedAt = Date.now();
+      while (Date.now() - startedAt < timeoutMs) {
+        if (
+          window.AISeller &&
+          typeof window.AISeller.setContext === 'function' &&
+          typeof window.AISeller.showAndConnect === 'function'
+        ) {
+          return window.AISeller;
+        }
+        await new Promise(function (resolve) { setTimeout(resolve, 100); });
+      }
+      throw new Error('Docket widget did not load in time');
+    }
+
+    async function passContextToDocket() {
+      var rawContext = sessionStorage.getItem('circle_sales_context');
+      var AISeller;
+      try {
+        AISeller = await waitForDocketWidget(15000);
+      } catch (e) {
+        console.error('[Test] Docket widget never loaded:', e);
+        return;
+      }
+
+      if (!rawContext) {
+        console.warn('[Test] No warm context. Clara will use cold discovery.');
+        AISeller.showAndConnect();
+        return;
+      }
+
+      var context = JSON.parse(rawContext);
+      var result = await AISeller.setContext(context);
+      if (!result || result.success !== true) {
+        console.warn('[Test] Context handoff may have failed:', result);
+      } else {
+        console.log('[Test] Warm context handed off OK:', context);
+      }
+      AISeller.showAndConnect();
+    }
+
+    passContextToDocket().catch(function (error) {
+      console.error('[Test] Failed to pass context:', error);
+    });
+  </script>
+</body>
+</html>
