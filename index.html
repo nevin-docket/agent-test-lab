@@ -1,0 +1,208 @@
+TEST_INSERT_O<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talk to Sales — Test Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f6f7fb;
+      min-height: 100vh;
+      color: #111827;
+      -webkit-font-smoothing: antialiased;
+    }
+    .nav {
+      padding: 22px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .logo { font-size: 17px; font-weight: 700; color: #4f46e5; }
+    .nav-flag {
+      font-size: 12px;
+      background: #f3f4f6;
+      color: #6b7280;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-weight: 600;
+    }
+    .container {
+      max-width: 560px;
+      margin: 56px auto;
+      padding: 0 24px;
+    }
+    .form-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px;
+      letter-spacing: -0.4px;
+    }
+    .sub { color: #6b7280; margin: 0 0 28px; font-size: 15px; }
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 13px;
+      margin: 16px 0 6px;
+      color: #374151;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+      font-family: inherit;
+      background: white;
+      color: #111827;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+    select { cursor: pointer; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    button[type="submit"] {
+      margin-top: 28px;
+      width: 100%;
+      padding: 12px 16px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    button[type="submit"]:hover { background: #4338ca; }
+    .skip {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+    }
+    .skip a {
+      color: #6b7280;
+      text-decoration: none;
+      border-bottom: 1px dashed #d1d5db;
+      padding-bottom: 1px;
+    }
+    .skip a:hover { color: #111827; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="logo">Agent Test Lab</div>
+    <div class="nav-flag">internal test page</div>
+  </div>
+
+  <div class="container">
+    <div class="form-card">
+      <h1>Talk to our sales team</h1>
+      <p class="sub">Tell us a bit about you so we can route the conversation correctly.</p>
+
+      <form id="salesForm">
+        <div class="row">
+          <div>
+            <label for="firstname">First name</label>
+            <input id="firstname" name="firstname" type="text" required />
+          </div>
+          <div>
+            <label for="lastname">Last name</label>
+            <input id="lastname" name="lastname" type="text" required />
+          </div>
+        </div>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+
+        <label for="what_do_you_want_to_achieve_with_circle">What is your goal with Circle?</label>
+        <select id="what_do_you_want_to_achieve_with_circle" name="what_do_you_want_to_achieve_with_circle" required>
+          <option value="">— select —</option>
+          <option>Migrate a community</option>
+          <option>Build a community</option>
+          <option>Just exploring</option>
+        </select>
+
+        <label for="current_community_or_membership_size">How many members are in your community?</label>
+        <select id="current_community_or_membership_size" name="current_community_or_membership_size" required>
+          <option value="">— select —</option>
+          <option>I don't have a community yet</option>
+          <option>Between 1 and 100 members</option>
+          <option>Between 100 and 1,000 members</option>
+          <option>Between 1,000 and 5,000 members</option>
+          <option>Over 5,000 members</option>
+        </select>
+
+        <label for="annual_revenue__range_">What is your annual revenue across your entire business?</label>
+        <select id="annual_revenue__range_" name="annual_revenue__range_" required>
+          <option value="">— select —</option>
+          <option>Under $50K/year or no revenue</option>
+          <option>$50K - $100K/year</option>
+          <option>$100K - $250K/year</option>
+          <option>$250K - $1M/year</option>
+          <option>$1M - $10M/year</option>
+          <option>Over $10M/year</option>
+        </select>
+
+        <label for="part_of_a_team">Are you part of a team?</label>
+        <select id="part_of_a_team" name="part_of_a_team" required>
+          <option value="">— select —</option>
+          <option>No, just me for now</option>
+          <option>Yes, have part-time help or contractors</option>
+          <option>Yes, have full-time teammates</option>
+        </select>
+
+        <label for="desired_time_to_implement_community_product">What is your implementation timeline?</label>
+        <select id="desired_time_to_implement_community_product" name="desired_time_to_implement_community_product" required>
+          <option value="">— select —</option>
+          <option>I don't know, or beyond a year</option>
+          <option>Within a year</option>
+          <option>In a few months</option>
+          <option>Immediately</option>
+        </select>
+
+        <label for="plan_interest_survey_response">What plan are you interested in?</label>
+        <select id="plan_interest_survey_response" name="plan_interest_survey_response" required>
+          <option value="">— select —</option>
+          <option>I am not sure</option>
+          <option>Professional</option>
+          <option>Business</option>
+          <option>Circle Plus</option>
+        </select>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <div class="skip">
+        <a href="./landing.html">Skip form — test cold path</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('salesForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      var data = Object.fromEntries(fd.entries());
+      sessionStorage.setItem('circle_sales_context', JSON.stringify(data));
+      window.location.href = './landing.html';
+    });
+  </script>
+</body>
+</html>
