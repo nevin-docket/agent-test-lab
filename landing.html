@@ -235,7 +235,6 @@
 
       if (!rawContext) {
         console.warn('[Test] No warm context. Clara will use cold discovery.');
-        AISeller.showAndConnect();
         return;
       }
 
@@ -246,7 +245,6 @@
       } else {
         console.log('[Test] Warm context handed off OK:', context);
       }
-      AISeller.showAndConnect();
     }
 
     passContextToDocket().catch(function (error) {
